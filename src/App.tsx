@@ -16,6 +16,7 @@ export type AnswerObject = {
   correct: boolean;
   correctAnswer: string;
 }
+const categoryArray: number[] = [9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27];
 
 const TOTAL_QUESTIONS= 10;
 
@@ -26,16 +27,20 @@ function App() {
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
-
+  
   // console.log(fetchQuizQuestions(TOTAL_QUESTIONS,Difficulty.EASY))
-
+  
+  
   const startTrivia = async() => {
     setLoading(true);
     setGameOver(false);
-
+    
+    let category = categoryArray[Math.floor(Math.random() * categoryArray.length)];
+    console.log(category);
     const newQuestions = await fetchQuizQuestions(
       TOTAL_QUESTIONS,
-      Difficulty.EASY
+      Difficulty.EASY,
+      category
     );
 
     setQuestions(newQuestions);
